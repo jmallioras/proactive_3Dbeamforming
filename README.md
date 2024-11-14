@@ -1,4 +1,4 @@
-# Generating DoA Trajectory Tracks
+# Proactive 3D Beamforming with Transformers, RNNs and Ray-Tracing in MATLAB
 
 This guide explains how to generate Direction of Arrival (DoA) trajectory tracks using the provided MATLAB scripts. The process leverages a predefined track file created with the `gpsvisualizer.com` tool and an OpenStreetMap (OSM) file for geographic context and visualization.
 
