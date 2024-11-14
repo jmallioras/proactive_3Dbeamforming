@@ -32,14 +32,14 @@ There are two main scripts that you need to execute to generate the final DoA tr
 In `track_production_dataset.m`, change the necessary paths to your local files and define the dataset name(containing the user movement tracks) as well as the total number of random tracks you whish to generate based on the predefined GPS traces in the `.txt` file:
 
 ```matlab
-    % Set OSM map file of the area of interest
-    map_file = "peiraias.osm"; 
+% Set OSM map file of the area of interest
+map_file = "peiraias.osm"; 
 
-    % Set file containing the predefined GPS traces
-    predefined_traces_file = 'peiraias_pedestrian_tracks.txt';
+% Set file containing the predefined GPS traces
+predefined_traces_file = 'peiraias_pedestrian_tracks.txt';
 
-    % Define the output dataset name
-    dataset_filename = 'dummy_test'; 
+% Define the output dataset name
+dataset_filename = 'dummy_test'; 
 ```
 Aferwards, run the script. This will generate a set of movement tracks in the `\Paths` directory. 
 
