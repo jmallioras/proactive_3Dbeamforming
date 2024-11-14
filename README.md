@@ -1,7 +1,7 @@
 # Proactive 3D Beamforming with Transformers, RNNs, and Ray-Tracing in MATLAB
 
 This repository accompanies the work presented in the paper:  
-Mallioras, Ioannis, Yioultsis, Traianos V., Kantartzis, Nikolaos V., Lazaridis, Pavlos I., and Zaharis, Zaharias D. "A Novel Neural Network Approach to Proactive 3-D Beamforming" [IEEE Xplore](https://ieeexplore.ieee.org/document/10750053).
+"A Novel Neural Network Approach to Proactive 3-D Beamforming" [IEEE Xplore](https://ieeexplore.ieee.org/document/10750053).
 
 ## Synopsis
 
@@ -12,6 +12,8 @@ This study focuses on a novel proactive beamforming scheme at millimeter-wave fr
 - **Proactive Beamforming**: The models are trained to predict future DoAs, enabling real-time beamforming adjustments.
 
 ## Methodology Overview
+
+![proactive_scheme](images/proactive_system.png)
 
 The process of proactive beamforming is divided into three primary stages, each corresponding to a subfolder in this repository:
 
@@ -57,7 +59,8 @@ The process of proactive beamforming is divided into three primary stages, each 
   - Compare performance with baseline algorithms (e.g., Kalman Filters).
   - Analyze statistical metrics and visualize results.
 
-### Placeholder for Figure 3: Model Evaluation Results
+
+![RNN](images/RNN_Proactive.png)
 
 ## Additional Information
 
