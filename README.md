@@ -59,7 +59,7 @@ The process of proactive beamforming is divided into three primary stages, each 
   - Compare performance with baseline algorithms (e.g., Kalman Filters).
   - Analyze statistical metrics and visualize results.
 
-<div style="background-color: white; padding: 10px; display: inline-block;">
+<div style="background-color: white;">
   <img src="images/RNN_Proactive.png" alt="RNN_system" width="600"/>
 </div>
 
