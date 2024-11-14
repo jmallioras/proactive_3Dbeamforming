@@ -63,6 +63,15 @@ The process of proactive beamforming is divided into three primary stages, each 
   <img src="images/RNN_Proactive.png" alt="RNN_system" width="600"/>
 </div>
 
+<table>
+  <tr>
+    <td style="background-color: white;">
+     <img src="images/RNN_Proactive.png" alt="RNN_system" width="600"/>
+    </td>
+  </tr>
+</table>
+
+
 ## Additional Information
 
 ### Input File Details
