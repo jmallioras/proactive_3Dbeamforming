@@ -13,8 +13,6 @@ This study focuses on a novel proactive beamforming scheme at millimeter-wave fr
 
 ## Methodology Overview
 
-![proactive_scheme](images/proactive_system.png)
-
 The process of proactive beamforming is divided into three primary stages, each corresponding to a subfolder in this repository:
 
 ### 1. Dataset Generation (`step1_dataset_generation`)
@@ -28,9 +26,9 @@ The process of proactive beamforming is divided into three primary stages, each 
   - Generate movement paths for pedestrians and vehicles.
   - Create DoA trajectories using ray-tracing propagation models.
 
-![OSM File simulating an area of Pireaus, Greece](images/pireaus_tower.jpg)
+<img src="images/pireaus_tower.jpg" alt="OSM comapirson" width="400"/>
 
-![Predefined Tracks Visualization](images/predef_tracks2.jpg)
+<img src="images/predef_tracks2.jpg" alt="predefined tracks" width="400"/>
 
 
 ### 2. Training Neural Networks (`step2_training_nn`)
@@ -45,7 +43,9 @@ The process of proactive beamforming is divided into three primary stages, each 
   - Train models using supervised learning techniques.
   - Evaluate models based on prediction accuracy and response time.
 
-### Placeholder for Figure 2: Neural Network Model Architectures
+<img src="images/transformer.png" alt="RNN system" width="400"/>
+
+<img src="images/RNN_Proactive.png" alt="RNN system" width="400"/>
 
 ### 3. Evaluating the Proactive Scheme (`step3_evaluation`)
 
@@ -58,19 +58,8 @@ The process of proactive beamforming is divided into three primary stages, each 
   - Test models on unseen data.
   - Compare performance with baseline algorithms (e.g., Kalman Filters).
   - Analyze statistical metrics and visualize results.
-
-<div style="background-color: white;">
-  <img src="images/RNN_Proactive.png" alt="RNN_system" width="600"/>
-</div>
-
-<table>
-  <tr>
-    <td style="background-color: white;">
-     <img src="images/RNN_Proactive.png" alt="RNN_system" width="600"/>
-    </td>
-  </tr>
-</table>
-
+ 
+<img src="images/3d_routes.jpg" alt="3d routes" width="400"/>
 
 ## Additional Information
 
