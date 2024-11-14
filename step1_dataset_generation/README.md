@@ -29,25 +29,25 @@ There are two main scripts that you need to execute to generate the final DoA tr
 
 ### Step 1: Reading the Predefined Tracks and creating realistic movement patterns
 
-In `track_production_dataset.m`, change the necessary paths to your local files:
+In `track_production_dataset.m`, change the necessary paths to your local files and define the dataset name(containing the user movement tracks) as well as the total number of random tracks you whish to generate based on the predefined GPS traces in the `.txt` file:
 
+```matlab
+    % Set OSM map file of the area of interest
+    map_file = "peiraias.osm"; 
+
+    % Set file containing the predefined GPS traces
+    predefined_traces_file = 'peiraias_pedestrian_tracks.txt';
+
+    % Define the output dataset name
+    dataset_filename = 'dummy_test'; 
+```
+Aferwards, run the script. This will generate a set of movement tracks in the `\Paths` directory. 
 
 
 ### Step 2: Generating DoA Trajectories
-To generate DoA trajectories for a given track, use the main MATLAB script. The workflow involves setting up a transmitter (Tx) and receiver (Rx), defining antenna patterns, and calculating DoA angles using ray tracing.
+To generate DoA trajectories for a given track, use the `doa_trajectory_dataset.m` script. Make sure to define the name of the final dataset (containing the DoA trajectories).
 
-**Example usage:**
-1. Load the predefined tracks:
-    ```matlab
-    trackdata = load('Paths/upa2_pedestrian_paths4k.mat');
-    tracks = trackdata.paths;
-    ```
-2. Generate DoA trajectories:
-    ```matlab
-    track_DOAS = cell(n_tracks, 1);
-    for track_id = 1:n_tracks
-        track = tracks{track_id};
-        track_DOAS{track_id} = getAods(track);
-        % Save periodically or as needed
-    end
-    ```
+```matlab
+% Set final dataset name
+final_dataset_name =  'dummy_doa_tracks';
+```
