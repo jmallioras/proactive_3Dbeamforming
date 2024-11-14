@@ -4,7 +4,7 @@ This guide explains how to generate Direction of Arrival (DoA) trajectory tracks
 
 ## Prerequisites
 
-- **MATLAB** with the Phased Array System Toolbox and Antenna Toolbox.
+- **MATLAB** version higher than 2023b with the Phased Array System Toolbox, Mapping Toolbox, Antenna Toolbox.
 - A predefined track file in `.txt` format, generated using `gpsvisualizer.com`.
 - An OSM map file (e.g., `peiraias.osm`) for geographic visualization and context.
 
@@ -22,10 +22,16 @@ Each entry consists of:
 - `longitude`: Longitude coordinate
 - `name` and `desc` (optional): Additional details, if present.
 
+You can draw your own GPS traces, using [gpsvisualizer.com](https://www.gpsvisualizer.com/draw/) and export the file once you have are finished.
+
 ## Usage Instructions
+There are two main scripts that you need to execute to generate the final DoA trajectory dataset. The first one is `track_production_dataset.m` where realistic movement tracks are generated based on the predefined GPS traces you provided. The second, is `doa_trajectory_dataset.m` where for each of the movement tracks, the DoAs (azimuth, elevation) are collected at each timestep using ray-tracing with an efficient heuristic method.
 
 ### Step 1: Reading the Predefined Tracks and creating realistic movement patterns
-To read the predefined GPS tracks, we the provided `readGpsTracks` function.
+
+In `track_production_dataset.m`, change the necessary paths to your local files:
+
+
 
 ### Step 2: Generating DoA Trajectories
 To generate DoA trajectories for a given track, use the main MATLAB script. The workflow involves setting up a transmitter (Tx) and receiver (Rx), defining antenna patterns, and calculating DoA angles using ray tracing.
