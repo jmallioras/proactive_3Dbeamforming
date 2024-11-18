@@ -4,7 +4,7 @@ This guide explains how to generate Direction of Arrival (DoA) trajectory tracks
 
 ## Prerequisites
 
-- **MATLAB** version higher than 2023b with the Phased Array System Toolbox, Mapping Toolbox, Antenna Toolbox.
+- **MATLAB** version higher than * 2023b * with the Phased Array System Toolbox, Mapping Toolbox, Antenna Toolbox.
 - A predefined track file in `.txt` format, generated using `gpsvisualizer.com`.
 - An OSM map file (e.g., `peiraias.osm`) for geographic visualization and context.
 
