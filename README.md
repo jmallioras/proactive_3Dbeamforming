@@ -21,6 +21,7 @@ The process of proactive beamforming is divided into three primary stages, each 
   - **OSM Map File (`peiraias.osm`)**: Provides geographic data for simulation and visualization.
     <img src="images/pireaus_tower.jpg" alt="OSM comapirson" width="400"/>
   - **Predefined Track File (`peiraias_pedestrian_tracks.txt`)**: Contains GPS tracks generated with `gpsvisualizer.com` and processed by `readGpsTracks()`.
+    
     <img src="images/predef_tracks2.jpg" alt="predefined tracks" width="400"/>
 - **Procedure**:
   - Import OSM data and predefined tracks.
