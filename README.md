@@ -16,19 +16,17 @@ This study focuses on a novel proactive beamforming scheme at millimeter-wave fr
 The process of proactive beamforming is divided into three primary stages, each corresponding to a subfolder in this repository:
 
 ### 1. Dataset Generation (`step1_dataset_generation`)
-
 - **Purpose**: Simulate realistic movement paths and generate DoA trajectories using ray-tracing techniques.
 - **Input Files**:
   - **OSM Map File (`peiraias.osm`)**: Provides geographic data for simulation and visualization.
+    <img src="images/pireaus_tower.jpg" alt="OSM comapirson" width="400"/>
   - **Predefined Track File (`peiraias_pedestrian_tracks.txt`)**: Contains GPS tracks generated with `gpsvisualizer.com` and processed by `readGpsTracks()`.
+    <img src="images/predef_tracks2.jpg" alt="predefined tracks" width="400"/>
 - **Procedure**:
   - Import OSM data and predefined tracks.
   - Generate movement paths for pedestrians and vehicles.
-  - Create DoA trajectories using ray-tracing propagation models.
-
-<img src="images/pireaus_tower.jpg" alt="OSM comapirson" width="400"/>
-
-<img src="images/predef_tracks2.jpg" alt="predefined tracks" width="400"/>
+  - Collect DoA trajectories using ray-tracing propagation models in MATLAB.
+#### Please go to `/step1_dataset_generation` for further details and scripts.
 
 
 ### 2. Training Neural Networks (`step2_training_nn`)
