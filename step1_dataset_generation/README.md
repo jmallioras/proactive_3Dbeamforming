@@ -25,8 +25,9 @@ Each entry consists of:
 You can draw your own GPS traces, using [gpsvisualizer.com](https://www.gpsvisualizer.com/draw/) and export the file once you have are finished.
 
 ## Usage Instructions
-There are two main scripts that you need to execute to generate the final DoA trajectory dataset. The first one is `track_production_dataset.m` where realistic movement tracks are generated based on the predefined GPS traces you provided. The second, is `doa_trajectory_dataset.m` where for each of the movement tracks, the DoAs (azimuth, elevation) are collected at each timestep using ray-tracing with an efficient heuristic method.
-
+There are three main scripts that you need to execute to generate the final DoA trajectory dataset. The first one is `track_production_dataset.m` where realistic movement tracks are generated based on the predefined GPS traces you provided. The second, is `doa_trajectory_dataset.m` where for each of the movement tracks, the DoAs (azimuth, elevation) are collected at each timestep using ray-tracing with an efficient heuristic method.
+Finally, you need to execute the `data_preparation.m` to calculate and add the angular velocities and accelerations to
+the final dataset.
 ### Step 1: Reading the Predefined Tracks and creating realistic movement patterns
 
 In `track_production_dataset.m`, change the necessary paths to your local files and define the dataset name (containing the user movement tracks) as well as the total number of random tracks you whish to generate based on the predefined GPS traces in the `.txt` file:
@@ -50,4 +51,14 @@ To generate DoA trajectories for a given track, execute the `doa_trajectory_data
 ```matlab
 % Set final dataset name
 final_dataset_name =  'dummy_doa_tracks';
+```
+
+### Step 3: Preparing the data
+After generating the DoA trajectories, we need to execute the `data_preparation.m` to calculate and concatenate the angular velocity and acceleration for each time-step of these trajectories.
+Make sure to change the directory of the doa tracks:
+
+```matlab
+% Read Track from Dataset Folder
+trackdata= load("Dataset/dummy_doa_tracks.mat");
+pathsMatrix = trackdata.track_DOAS;
 ```

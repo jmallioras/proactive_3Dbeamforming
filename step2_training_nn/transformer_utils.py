@@ -73,8 +73,6 @@ class DOAEncoder(nn.Module):
         self.d_model = d_model
         self.input_proj = nn.Linear(input_dim, d_model)
         self.pos_encoder = PositionalEncoding(d_model, dropout)
-        #encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=nhead, dropout=dropout, activation="gelu")
-        #self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_encoder_layers)
 
         encoder_layer = CustomTransformerEncoderLayer(d_model, nhead, dim_feedforward = 4*d_model, dropout=dropout)
         self.transformer_encoder = CustomTransformerEncoder(encoder_layer, num_encoder_layers)
@@ -87,7 +85,6 @@ class DOAEncoder(nn.Module):
         """
         # Project input dimension to d_model
         src = self.input_proj(src) * math.sqrt(self.d_model)  # Scale embeddings
-        #print(src.shape)
         src = self.pos_encoder(src)
         output = self.transformer_encoder(src)
         output = self.output_proj(output[-1])  # Predict next DOA based on the last encoder output
@@ -175,15 +172,11 @@ class ExtendedContextualEmbedding2(nn.Module):
         # Handle binary features
         # If binary features are embedded:
         binary_embedded = self.binary_embedding(binary_data)
-        #print(f"Binary Shape: {binary_embedded.shape}")
-        #print(f"Binary sample: {binary_embedded}")
         # If directly using binary features, project them:
         # binary_embedded = self.binary_projection(binary_data.float())  # Ensure binary data is float
 
         # Handle continuous features
         continuous_embedded = self.continuous_projection(continuous_data)
-        #print(f"Continuous Shape: {continuous_embedded.shape}")
-        #print(f"Continuous sample: {continuous_embedded}")
         # Combine embedded features
         combined_context = binary_embedded + continuous_embedded  # Element-wise addition or concatenation
         return combined_context
@@ -207,7 +200,6 @@ class contextDOAEncoder4(nn.Module):
         src = self.pos_encoder(src)
         context_emb = self.pos_encoder(context_emb)
         src = torch.cat([src, context_emb], dim=-1)  # Concatenate along the feature dimension
-        #print(f"src shape: {src.shape}")
         output = self.transformer_encoder(src)
         output = torch.tanh(self.output_proj(output[-1]))  # Predict next DoA
         return output
@@ -225,7 +217,6 @@ class DOAEncoder4(nn.Module):
     def forward(self, src):
         src = self.input_proj(src) * math.sqrt(self.d_model/2)  # Scale embeddings
         src = self.pos_encoder(src)
-        #print(f"src shape: {src.shape}")
         output = self.transformer_encoder(src)
         output = torch.tanh(self.output_proj(output[-1]))  # Predict next DoA
         return output
