@@ -1,17 +1,18 @@
 # Import Libraries
 '''
-- `transformer_utils.py` contains the class definitions of different transformer (encoder-only) models that were tested
-for this task. Finally, the model `contextDOAEncoder4` was used as the proposed architecture.
+- `transformer_utils.py` contains the class definition of the transformer (encoder-only) model`contextDOAEncoder4`
+ that was used as the proposed architecture.
 
 -`utility_functions.py' contains various important functions for data manipulation, plotting, and more that are used throughout
 this script.
-
 '''
+
 import os
 from utility_functions import *
 from transformer_utils import *
 import torch
 import random
+from torch.utils.data import Dataset, DataLoader
 import torch.optim as optim
 from transformer_utils import *
 import numpy as np
@@ -121,14 +122,22 @@ figure_name = 'training_prog_big_v1.png'
 batch_size = 64
 additional_features_dim = 4
 context_size = 2
-d_model = 256
-context_dim = d_model
 input_dim = 2
-nhead = 4
-num_encoder_layers = 2
 dropout = 0.00
 lr = 0.0001
 num_epochs = 500
+
+# Big model design
+#d_model = 512
+#context_dim = d_model
+#nhead = 8
+#num_encoder_layers = 4
+
+# Small model design
+d_model = 256
+context_dim = d_model
+nhead = 4
+num_encoder_layers = 2
 
 # Dataloaders
 train_dataset = DOADataset(trainset, device)
@@ -178,17 +187,14 @@ for epoch in range(num_epochs):
         cont_feat = src_batch[:, :, 2:6]  # Extract continuous features (velocity,acceleration)
         input = src_batch[:, :, :2]  # Extract input sequence (DoAs only)
         output = model(input, context, cont_feat)  # Forward pass
-        # output = model(input)
         loss = torch.sqrt(criterion(output, tgt_batch))  # RMSE loss
         loss.backward()  # Backpropagation
         optimizer.step()  # Update model parameters
         total_loss += loss.item()
 
     if batch_id % 5000 == 0:
-        print(f"\nTRAIN Batch: {batch_id}")
-        # print(f"Input DoAs :{input[:,-1,:2]}")
+        print(f"\nTRAIN Batch: {batch_id} (Prediction Example)")
         print(f"TNN hat:{tgt_batch[-1, :]}")
-        # print(f"RNN Input (Last of batch): {src_batch[-1]}")
         print(f"TNN Out: {output[-1, :]}")
         print(f"Loss: {total_loss / (batch_id + 1)}")
 
@@ -210,8 +216,8 @@ for epoch in range(num_epochs):
             output = model(input, context, cont_feat)  # Forward pass
             loss = torch.sqrt(criterion(output, tgt_batch))  # RMSE loss
             total_val_loss += loss.item()
-            if batch_id % 1000 == 0:
-                print(f"\nTESTBatch: {batch_id}")
+            if batch_id % 5000 == 0:
+                print(f"\nTEST Batch: {batch_id} (Prediction Example)")
                 print(f"TNN hat:{tgt_batch[-1, :]}")
                 print(f"TNN Out: {output[-1, :]}")
                 print(f"Loss: {total_val_loss / (batch_id + 1)}")
@@ -263,42 +269,4 @@ for epoch in range(num_epochs):
         'elapsed_time': elapsed_time + epoch_time
     }, model_path)
 
-# Angular deviation calculation
-model.eval()
-n_avg = 10000
-seq_len = 5
-ang_dis = []
-stopwatch = []
-# Shuffle Validation set
-valset = valset[torch.randperm(valset.shape[0])]
-val_dataset = DOADataset(valset)
-
-for idx in range(n_avg):
-    # Distinguish input from context
-    input = val_dataset.src_data[idx, 0:seq_len, :input_dim]
-    context = val_dataset.src_data[idx, 0:seq_len, 6].int()
-    cont_feat = val_dataset.src_data[idx, 0:seq_len, input_dim:6]
-
-    yhat = val_dataset.tgt_data[idx, seq_len - 1, :2]
-    yhat_az = denormalize_data(yhat[0], denorm_az[0], denorm_az[1])
-    yhat_el = denormalize_data(yhat[1], denorm_el[0], denorm_el[1])
-    tic = time.time()
-    out = model(input, context, cont_feat)  # Forward pass
-    toc = time.time() - tic
-    out_az = denormalize_data(out[0], denorm_az[0], denorm_az[1])
-    out_el = denormalize_data(out[1], denorm_el[0], denorm_el[1])
-    stopwatch.append(toc)
-    yhat_az, yhat_el = inverse_transform_elevation_azimuth(yhat_az.cpu().item(), yhat_el.cpu().item())
-    out_az, out_el = inverse_transform_elevation_azimuth(out_az.detach().cpu().item(), out_el.detach().cpu().item())
-    ang_dis.append(angular_distance_3D(yhat_el, out_el, yhat_az, out_az))
-
-stopwatch = np.array(stopwatch)
-ang_dis = np.array(ang_dis)
-print(f'Input path: ')
-for aoa in input:
-    print(f" (EL:{denormalize_data(aoa[1], -63, 46.9):.2f}, AZ: {denormalize_data(aoa[0], -90, 90):.2f})")
-print(f"YHAT: EL:{yhat_el}, AZ:{yhat_az}")
-print(f"OUT: EL:{out_el}, AZ:{out_az}")
-
-print(
-    f"Angular Distance:\nmean:{ang_dis.mean():.2f} deg | std:{ang_dis.std():.2f} deg | \nAvg Response Time: mean: {stopwatch.mean() * 1e3:.2f} msec | std: {stopwatch.std() * 1e3:.2f} msec")
+print("Training Completed!")
