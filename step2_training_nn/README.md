@@ -7,6 +7,7 @@
 Using the dataset with DoA trajectories created in step 1, we intend to train and evaluate different types of neural networks (NNs) for the task in hand. 
 - `train_model.py` is the main script that performs all necessary steps described below.
 
+- `evaluate_model.ipynb` is a Jupyter notebook used to evaluate the trained model by examining the learning curves, performing a statistical analysis on its DoA forecasting accuracy and comparing it to the big transformer model.
 - `transformer_utils.py` contains the class definitions of different transformer (encoder-only) models that were tested
 for this task. Finally, the model `contextDOAEncoder4` was used as the proposed architecture.
 
