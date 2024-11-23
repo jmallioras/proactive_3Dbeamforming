@@ -32,19 +32,13 @@ The process of proactive beamforming is divided into three primary stages, each 
 
 ### 2. Training Neural Networks (`step2_training_nn`)
 
-- **Purpose**: Train Transformer, LSTM, and GRU models to predict future DoAs.
-- **Key Models**:
-  - **Transformer Neural Network (TNN)**
-  - **LSTM-Based Recurrent Neural Networks**
-  - **GRU-Based Recurrent Neural Networks**
+- **Purpose**: Train a small Transformer model to predict future DoAs.
 - **Procedure**:
   - Prepare input data sequences and labels.
   - Train models using supervised learning techniques.
   - Evaluate models based on prediction accuracy and response time.
 
 <img src="images/transformer.png" alt="RNN system" width="400"/>
-
-<img src="images/RNN_Proactive.png" alt="RNN system" width="400"/>
 
 ### 3. Evaluating the Proactive Scheme (`step3_evaluation`)
 
@@ -55,7 +49,6 @@ The process of proactive beamforming is divided into three primary stages, each 
   - Real-time beamforming adjustments using predicted DoAs.
 - **Procedure**:
   - Test models on unseen data.
-  - Compare performance with baseline algorithms (e.g., Kalman Filters).
   - Analyze statistical metrics and visualize results.
  
 <img src="images/3d_routes.jpg" alt="3d routes" width="400"/>
